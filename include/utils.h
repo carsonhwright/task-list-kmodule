@@ -6,4 +6,5 @@ struct os_tasks {
     int pid;
 };
 
-void do_something(struct os_tasks* tasks);
+void print_linear(struct os_tasks* tasks);
+void print_process_tree(void);

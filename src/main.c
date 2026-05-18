@@ -28,7 +28,9 @@ static int __init simple_init(void)
 {
 	printk(KERN_INFO "Loading Task List Module\n");
 	struct os_tasks tasks;
-	do_something(&tasks);
+	print_linear(&tasks);
+	// struct task_struct *tasks;
+	print_process_tree();
 	// struct birthday *proto_person = make_person_proto();
 	// traverse_list(proto_person);
 	return 0;
