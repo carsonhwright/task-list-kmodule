@@ -13,3 +13,5 @@ struct task_lifo_item {
 
 void print_linear(struct os_tasks* tasks);
 void print_process_tree(void);
+static int push_task(struct task_struct task);
+static int pop_task(void);
