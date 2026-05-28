@@ -4,6 +4,7 @@
 #include <linux/sched.h>
 #include <linux/sched/signal.h>
 #include <linux/list.h>
+#include <linux/slab.h>
 
 #include "../include/utils.h"
 
@@ -12,6 +13,20 @@ struct task_struct *child_reader, *deep_reader;
 struct task_struct *parent_reader;
 // struct list_head *child_list;
 struct list_head *parent_list;
+static LIST_HEAD(lifo_queue_head);
+
+static int push_task(struct task_struct task) {
+    struct task_lifo_item *new_item;
+    new_item = kmalloc(sizeof(new_item), GFP_KERNEL);
+    if (!new_item) {
+        // OS No Memory Error
+        return -ENOMEM;
+    }
+    new_item->task_item = task;
+    list_add(&new_item->head, lifo_queue_head);
+    printk("Added new task item %s\tpid: %d\n.", task->comm, task->pid);
+
+}
 
 void print_linear(struct os_tasks* os_tasks) {
     rcu_read_lock();

@@ -6,5 +6,10 @@ struct os_tasks {
     int pid;
 };
 
+struct task_lifo_item {
+    struct task_struct task_item;
+    struct list_head head;
+};
+
 void print_linear(struct os_tasks* tasks);
 void print_process_tree(void);
